@@ -1,47 +1,78 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sistema de Inventario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-pagina="inicio">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <header>
-        <h1>Sistema de Inventario</h1>
-        <p>Aplicación demostrativa para la Unidad IV</p>
+    <header class="barra">
+        <div class="barra__interior">
+            <a class="marca" href="index.html">
+                <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect x="5" y="3" width="20" height="26" rx="2" fill="#FBFCFE"/>
+                    <path d="M10 3v26" stroke="#D64545" stroke-width="1.6"/>
+                    <path d="M13 10h9M13 15h9M13 20h6" stroke="#9FB2DA" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M27.5 9.5l2 2-8.5 8.5-2.8.8.8-2.8z" fill="#F2C230" stroke="#2B2F36" stroke-width="1.1" stroke-linejoin="round"/>
+                </svg>
+                Sistema de Inventario
+            </a>
+            <nav aria-label="Principal">
+                <ul class="menu">
+                    <li><a href="index.html" aria-current="page">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="agregar.html">Agregar Producto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="agregar.html">Agregar Producto</a>
-    </nav>
+    <main id="contenido">
+        <p class="aviso" id="aviso-almacen" role="alert" hidden></p>
+        <section class="hoja" aria-labelledby="titulo-inicio">
+            <h1 id="titulo-inicio">Inventario de la papelería</h1>
+            <p class="entrada">Consulta cuántos productos tienes, registra artículos nuevos y corrige o elimina los que ya no manejas. Los cambios se guardan en este navegador.</p>
 
-    <main>
-        <h2>Bienvenido</h2>
+            <dl class="resumen" aria-label="Resumen del inventario">
+                <div><dt>Productos registrados</dt><dd id="total-productos">0</dd></div>
+                <div><dt>Piezas en existencia</dt><dd id="total-piezas">0</dd></div>
+                <div><dt>Categorías</dt><dd id="total-categorias">0</dd></div>
+                <div><dt>Por resurtir</dt><dd id="total-revisar">0</dd></div>
+            </dl>
 
-        <p>
-            Este sistema permite visualizar el inventario de productos
-            y registrar nuevos artículos.
-        </p>
+            <div class="accesos">
+                <a class="boton boton--principal" href="agregar.html">Agregar producto</a>
+                <a class="boton boton--tinta" href="productos.html">Ver inventario</a>
+            </div>
+        </section>
 
-        <div class="card">
-            <h3>Módulos disponibles</h3>
-            <ul>
-                <li>Visualización de productos</li>
-                <li>Formulario de captura</li>
-                <li>Navegación entre páginas</li>
-            </ul>
-        </div>
+        <section class="hoja" aria-labelledby="titulo-revisar">
+            <h2 id="titulo-revisar">Productos por resurtir</h2>
+            <p class="entrada">Aparecen aquí los productos agotados o con 10 piezas o menos.</p>
+            <ul class="pendientes" id="lista-revisar"></ul>
+        </section>
+
+        <section class="hoja zona-secundaria" aria-labelledby="titulo-ejemplo">
+            <div>
+                <h2 id="titulo-ejemplo">Datos de ejemplo</h2>
+                <p>Si quieres empezar de nuevo, puedes regresar el inventario a los 4 productos originales.</p>
+            </div>
+            <button type="button" class="boton boton--texto-rojo" id="btn-reiniciar">Restaurar productos de ejemplo</button>
+        </section>
     </main>
 
     <footer>
-        Aplicaciones Web - Unidad 4
+        Aplicaciones Web - Unidad 4 | Sistema de Inventario
     </footer>
 
+    <script src="app.js"></script>
 </body>
 
 </html>

@@ -1,52 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Agregar Producto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Agregar producto | Sistema de Inventario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-pagina="formulario">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <header>
-        <h1>Registro de Producto</h1>
+    <header class="barra">
+        <div class="barra__interior">
+            <a class="marca" href="index.html">
+                <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect x="5" y="3" width="20" height="26" rx="2" fill="#FBFCFE"/>
+                    <path d="M10 3v26" stroke="#D64545" stroke-width="1.6"/>
+                    <path d="M13 10h9M13 15h9M13 20h6" stroke="#9FB2DA" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M27.5 9.5l2 2-8.5 8.5-2.8.8.8-2.8z" fill="#F2C230" stroke="#2B2F36" stroke-width="1.1" stroke-linejoin="round"/>
+                </svg>
+                Sistema de Inventario
+            </a>
+            <nav aria-label="Principal">
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html">Productos</a></li>
+                    <li><a href="agregar.html" aria-current="page">Agregar Producto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="agregar.html">Agregar Producto</a>
-    </nav>
+    <main id="contenido">
+        <p class="aviso" id="aviso-almacen" role="alert" hidden></p>
+        <section class="hoja" aria-labelledby="titulo-formulario">
+            <div class="encabezado-hoja">
+                <div>
+                    <h1 id="titulo-formulario">Registro de producto</h1>
+                    <p class="entrada" id="entrada-formulario">Los campos marcados como opcionales se pueden dejar vacíos.</p>
+                </div>
+            </div>
 
-    <main>
+            <div id="no-encontrado" hidden>
+                <p>No existe un producto con el ID <strong id="no-encontrado-id"></strong>. Pudo haberse eliminado o el enlace está incompleto.</p>
+                <div class="accesos">
+                    <a class="boton boton--tinta" href="productos.html">Ver inventario</a>
+                    <a class="boton boton--borde" href="agregar.html">Agregar producto nuevo</a>
+                </div>
+            </div>
 
-        <form>
+            <form id="form-producto" class="formulario" novalidate>
+                <div class="resumen-errores" id="resumen-errores" tabindex="-1" role="alert" hidden>
+                    <h2>Revisa estos datos antes de guardar</h2>
+                    <ul></ul>
+                </div>
 
-            <label>Nombre del producto</label>
-            <input type="text" placeholder="Ingrese nombre">
+                <div class="campo">
+                    <label for="nombre">Nombre del producto</label>
+                    <input type="text" id="nombre" name="nombre" maxlength="80" placeholder="Ingrese nombre" autocomplete="off" aria-describedby="error-nombre" required>
+                    <span class="mensaje-error" id="error-nombre"></span>
+                </div>
 
-            <label>Categoría</label>
-            <input type="text" placeholder="Ingrese categoría">
+                <div class="fila-campos">
+                    <div class="campo">
+                        <label for="categoria">Categoría</label>
+                        <input type="text" id="categoria" name="categoria" maxlength="60" placeholder="Ingrese categoría" list="lista-categorias" autocomplete="off" aria-describedby="error-categoria" required>
+                        <datalist id="lista-categorias"></datalist>
+                        <span class="mensaje-error" id="error-categoria"></span>
+                    </div>
 
-            <label>Descripción</label>
-            <textarea rows="4"></textarea>
+                    <div class="campo">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" id="cantidad" name="cantidad" min="0" max="99999" step="1" inputmode="numeric" placeholder="0" aria-describedby="error-cantidad" required>
+                        <span class="mensaje-error" id="error-cantidad"></span>
+                    </div>
+                </div>
 
-            <label>Cantidad</label>
-            <input type="number" placeholder="0">
+                <div class="campo">
+                    <label for="descripcion">Descripción <span class="opcional">(opcional)</span> <span class="contador" id="contador-descripcion" aria-live="polite"></span></label>
+                    <textarea id="descripcion" name="descripcion" rows="4" aria-describedby="error-descripcion"></textarea>
+                    <span class="mensaje-error" id="error-descripcion"></span>
+                </div>
 
-            <button type="submit">
-                Guardar Producto
-            </button>
+                <div class="campo">
+                    <label><input type="checkbox" id="agregar-otro"> Seguir capturando después de guardar</label>
+                </div>
 
-        </form>
-
+                <div class="botones-formulario">
+                    <button type="submit" class="boton boton--principal" id="btn-guardar"><span id="btn-guardar-texto">Guardar Producto</span></button>
+                    <a class="boton boton--borde" href="productos.html">Cancelar</a>
+                </div>
+            </form>
+        </section>
     </main>
 
     <footer>
-        Sistema de Inventario
+        Aplicaciones Web - Unidad 4 | Sistema de Inventario
     </footer>
 
+    <script src="app.js"></script>
 </body>
 
 </html>

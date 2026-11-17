@@ -1,71 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Productos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Productos | Sistema de Inventario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&display=swap">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body data-pagina="productos">
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
 
-    <header>
-        <h1>Inventario de Productos</h1>
+    <header class="barra">
+        <div class="barra__interior">
+            <a class="marca" href="index.html">
+                <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true">
+                    <rect x="5" y="3" width="20" height="26" rx="2" fill="#FBFCFE"/>
+                    <path d="M10 3v26" stroke="#D64545" stroke-width="1.6"/>
+                    <path d="M13 10h9M13 15h9M13 20h6" stroke="#9FB2DA" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M27.5 9.5l2 2-8.5 8.5-2.8.8.8-2.8z" fill="#F2C230" stroke="#2B2F36" stroke-width="1.1" stroke-linejoin="round"/>
+                </svg>
+                Sistema de Inventario
+            </a>
+            <nav aria-label="Principal">
+                <ul class="menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="productos.html" aria-current="page">Productos</a></li>
+                    <li><a href="agregar.html">Agregar Producto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="productos.html">Productos</a>
-        <a href="agregar.html">Agregar Producto</a>
-    </nav>
+    <main id="contenido">
+        <p class="aviso" id="aviso-almacen" role="alert" hidden></p>
+        <section class="hoja" aria-labelledby="titulo-productos">
+            <div class="encabezado-hoja">
+                <div>
+                    <h1 id="titulo-productos">Inventario de productos</h1>
+                    <p class="entrada">Busca, modifica o elimina productos. El reporte en Excel incluye todo el inventario.</p>
+                </div>
+                <a class="boton boton--principal" href="agregar.html">Agregar producto</a>
+            </div>
 
-    <main>
+            <div class="herramientas">
+                <div class="buscador">
+                    <label for="buscar">Buscar producto</label>
+                    <input type="search" id="buscar" placeholder="Nombre, categoría o ID" autocomplete="off">
+                </div>
+                <button type="button" class="boton boton--tinta" id="btn-exportar">
+                    <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2a1 1 0 0 1 1 1v7.6l2.3-2.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L9 10.6V3a1 1 0 0 1 1-1zM4 15a1 1 0 0 1 1 1v1h10v-1a1 1 0 1 1 2 0v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1z"/></svg>
+                    Exportar a Excel
+                </button>
+            </div>
 
-        <table>
+            <p class="conteo" id="conteo" aria-live="polite"></p>
 
-            <tr>
-                <th>ID</th>
-                <th>Producto</th>
-                <th>Categoría</th>
-                <th>Existencia</th>
-            </tr>
-
-            <tr>
-                <td>1</td>
-                <td>Lápiz</td>
-                <td>Papelería</td>
-                <td>120</td>
-            </tr>
-
-            <tr>
-                <td>2</td>
-                <td>Cuaderno</td>
-                <td>Papelería</td>
-                <td>50</td>
-            </tr>
-
-            <tr>
-                <td>3</td>
-                <td>Borrador</td>
-                <td>Papelería</td>
-                <td>35</td>
-            </tr>
-
-            <tr>
-                <td>4</td>
-                <td>Regla</td>
-                <td>Papelería</td>
-                <td>40</td>
-            </tr>
-
-        </table>
-
+            <div class="tabla-envoltura">
+                <table>
+                    <caption class="sr-only">Lista de productos en inventario</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Categoría</th>
+                            <th scope="col" class="num">Existencia</th>
+                            <th scope="col" class="col-acciones"><span class="sr-only">Acciones</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla"></tbody>
+                </table>
+            </div>
+            <p class="nota-pie">Se marca "Stock bajo" cuando quedan 10 piezas o menos.</p>
+        </section>
     </main>
 
     <footer>
-        Sistema de Inventario
+        Aplicaciones Web - Unidad 4 | Sistema de Inventario
     </footer>
 
+    <script src="xlsx.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
